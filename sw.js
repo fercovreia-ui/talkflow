@@ -1,11 +1,13 @@
-/* TalkFlow — Service Worker: cache para funcionar offline */
-const CACHE = "talkflow-v2";
+/* TalkFlow — Service Worker: cache para funcionar offline
+   IMPORTANTE: ao publicar conteúdo novo, suba a versão do CACHE aqui e
+   o ?v= nos <script>/<link> do index.html. */
+const CACHE = "talkflow-v3";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./app.js",
-  "./data.js",
+  "./styles.css?v=7",
+  "./app.js?v=7",
+  "./data.js?v=7",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png"
@@ -27,7 +29,7 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   e.respondWith(
-    fetch(e.request)
+    fetch(e.request, { cache: "no-cache" })
       .then(res => {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(e.request, copy));

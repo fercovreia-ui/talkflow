@@ -301,6 +301,300 @@ const DATA = {
           tip: "\u201cFront desk\u201d = recepção. \u201cMy pleasure\u201d = \u201càs ordens / foi um prazer\u201d."
         }
       ]
+    },
+    {
+      id: "er",
+      icon: "\ud83c\udfe5",
+      title: "No pronto-socorro",
+      level: "Sa\u00fade",
+      desc: "Explique dor, alergia e plano de sa\u00fade",
+      steps: [
+        {
+          tutor: "Good afternoon. What brings you in today?",
+          tutor_pt: "Boa tarde. O que trouxe voc\u00ea aqui hoje?",
+          task: "Diga que est\u00e1 com uma forte dor de est\u00f4mago.",
+          hint: "I have a terrible stomachache.",
+          accept: ["i have a terrible stomachache", "i have a bad stomachache", "i have a strong stomachache", "my stomach hurts a lot", "i have a bad stomach ache", "i have a terrible stomach ache"],
+          tip: "Stomachache = dor de est\u00f4mago. Junte a parte do corpo + ache: headache, earache, backache, toothache."
+        },
+        {
+          tutor: "I see. How long have you had these symptoms?",
+          tutor_pt: "Entendo. H\u00e1 quanto tempo tem esses sintomas?",
+          task: "Diga que come\u00e7ou desde ontem \u00e0 noite.",
+          hint: "Since last night.",
+          accept: ["since last night", "since yesterday", "since yesterday night", "since this morning", "for two days", "since two days ago"],
+          tip: "\u201cHow long have you had…?\u201d \u00e9 a pergunta cl\u00e1ssica de m\u00e9dico. Responda com \u201cSince…\u201d (desde) ou \u201cFor…\u201d (h\u00e1)."
+        },
+        {
+          tutor: "Okay. Are you allergic to any medication?",
+          tutor_pt: "Ok. Voc\u00ea \u00e9 al\u00e9rgico a algum medicamento?",
+          task: "Diga que sim: al\u00e9rgico \u00e0 penicilina. (Ou diga que n\u00e3o.)",
+          hint: "Yes, I'm allergic to penicillin.",
+          pattern: "^(yes|yeah|yep|sure)[^a-z]*(i'?m )?allerg|^(no|nope|nah)[^a-z]*(i'?m not|no allerg|not allerg)",
+          tip: "Allergic to = al\u00e9rgico a. Nos EUA essa pergunta \u00e9 SEMPRE feita antes de receitar qualquer coisa."
+        },
+        {
+          tutor: "Understood. The doctor will see you shortly. Please fill out this form.",
+          tutor_pt: "Entendido. O m\u00e9dico vai te atender em breve. Por favor, preencha este formul\u00e1rio.",
+          task: "Aceite e pergunte se aceitam seu plano de sa\u00fade.",
+          hint: "Sure. Do you take my insurance?",
+          accept: ["sure do you take my insurance", "ok do you take my insurance", "do you take my insurance", "sure do you accept my insurance", "do you accept my insurance", "sure do you take my health insurance"],
+          tip: "\u201cDo you take my insurance?\u201d = \u201cvoc\u00eas aceitam meu plano de sa\u00fade?\u201d — \u201ctake\u201d no sentido de aceitar."
+        },
+        {
+          tutor: "Yes, we do. Please have a seat, and we'll call your name.",
+          tutor_pt: "Sim, aceitamos. Por favor, sente-se que vamos chamar seu nome.",
+          task: "Agrade\u00e7a.",
+          hint: "Thank you very much.",
+          accept: ["thank you very much", "thanks", "thank you", "thanks a lot", "thank you so much", "thanks so much"],
+          tip: "\u201cHave a seat\u201d = \u201csente-se\u201d. Voc\u00ea vai ouvir isso em consult\u00f3rios, recep\u00e7\u00f5es e restaurantes."
+        }
+      ]
+    },
+    {
+      id: "interview",
+      icon: "\ud83d\udcbc",
+      title: "Entrevista de emprego",
+      level: "Trabalho",
+      desc: "As 5 perguntas cl\u00e1ssicas e como responder",
+      steps: [
+        {
+          tutor: "Hi, come on in! Did you find the place okay?",
+          tutor_pt: "Oi, entre! Conseguiu achar o lugar facilmente?",
+          task: "Diga que sim e agrade\u00e7a pelo recebimento.",
+          hint: "Yes, I did. Thank you for having me.",
+          accept: ["yes i did thank you for having me", "yes thank you for having me", "yeah i did thanks for having me", "yes it was easy thank you for having me", "yes i did thanks for having me"],
+          tip: "\u201cThanks for having me\u201d = \u201cobrigado pelo recebimento/oportunidade\u201d — frase de ouro para abrir entrevistas."
+        },
+        {
+          tutor: "Great! So, tell me a little about yourself.",
+          tutor_pt: "\u00d3timo! Ent\u00e3o, me conte um pouco sobre voc\u00ea.",
+          task: "Apresente-se: comece com \u201cI'm…\u201d e fale seu trabalho e o que voc\u00ea ama.",
+          hint: "I'm a hard worker and I love learning new things.",
+          pattern: "^i(')?m ",
+          tip: "\u201cTell me about yourself\u201d \u00e9 a pergunta n\u00ba 1 de TODA entrevista. Estrutura: quem voc\u00ea \u00e9 + experi\u00eancia + o que voc\u00ea ama."
+        },
+        {
+          tutor: "Interesting. And why do you want to work with us?",
+          tutor_pt: "Interessante. E por que voc\u00ea quer trabalhar conosco?",
+          task: "Justifique: comece com \u201cBecause…\u201d.",
+          hint: "Because your company is a leader and I want to grow.",
+          pattern: "^(because|'cause) ",
+          tip: "\u201cGrow\u201d = crescer profissionalmente. Conecte seus objetivos com a empresa — isso impressiona."
+        },
+        {
+          tutor: "Nice answer. What are your salary expectations?",
+          tutor_pt: "Boa resposta. Quais s\u00e3o suas expectativas salariais?",
+          task: "Diga que busca algo em torno de cinco mil por m\u00eas. (Ou diga \u201cI'm flexible\u201d.)",
+          hint: "I'm looking for something around five thousand a month.",
+          pattern: "(around|about|flexible)",
+          tip: "Salary expectations = expectativa salarial. Se n\u00e3o quiser dar n\u00famero, diga \u201cI'm flexible\u201d (sou flex\u00edvel)."
+        },
+        {
+          tutor: "Perfect. We'll get back to you by Friday. It was great to meet you!",
+          tutor_pt: "Perfeito. Retornamos at\u00e9 sexta. Foi um prazer te conhecer!",
+          task: "Agrade\u00e7a e diga que fica no aguardo.",
+          hint: "Thank you! I look forward to hearing from you.",
+          accept: ["thank you i look forward to hearing from you", "thanks i look forward to hearing from you", "thank you i look forward to it", "thanks looking forward to hearing from you", "thank you looking forward to hearing from you"],
+          tip: "\u201cI look forward to hearing from you\u201d = \u201cfico no aguardo\u201d — fechamento cl\u00e1ssico e profissional."
+        }
+      ]
+    },
+    {
+      id: "airport",
+      icon: "\u2708\ufe0f",
+      title: "No aeroporto",
+      level: "Viagem",
+      desc: "Check-in, mala e embarque sem sufoco",
+      steps: [
+        {
+          tutor: "Good morning! May I see your passport and ticket, please?",
+          tutor_pt: "Bom dia! Posso ver seu passaporte e passagem, por favor?",
+          task: "Entregue dizendo \u201chere you go\u201d.",
+          hint: "Sure, here you go.",
+          accept: ["sure here you go", "sure here it is", "of course here you go", "yes here you go", "sure here you are", "yes here it is"],
+          tip: "\u201cHere you go\u201d = \u201caqui est\u00e1\u201d — a frase mais usada do mundo na hora de entregar qualquer coisa."
+        },
+        {
+          tutor: "Thank you. Are you checking any bags today?",
+          tutor_pt: "Obrigado. Vai despachar alguma mala hoje?",
+          task: "Diga que sim, s\u00f3 uma mala.",
+          hint: "Yes, just one suitcase.",
+          accept: ["yes just one suitcase", "yes one suitcase", "yeah just one bag", "yes just one bag", "just one suitcase", "yes i have one suitcase", "yes just this one suitcase"],
+          tip: "Checked bag = mala despachada. Carry-on = mala de m\u00e3o. \u201cCheck a bag\u201d = despachar mala."
+        },
+        {
+          tutor: "Would you prefer a window or an aisle seat?",
+          tutor_pt: "Voc\u00ea prefere assento na janela ou no corredor?",
+          task: "Escolha janela.",
+          hint: "A window seat, please.",
+          accept: ["a window seat please", "window seat please", "window please", "i'd like a window seat please", "a window seat", "the window seat please"],
+          tip: "Aisle seat = corredor. Window seat = janela. Middle seat = meio (todo americano evita!)."
+        },
+        {
+          tutor: "Here's your boarding pass. Boarding starts at nine thirty at gate B12.",
+          tutor_pt: "Aqui est\u00e1 seu cart\u00e3o de embarque. O embarque come\u00e7a \u00e0s nove e meia, port\u00e3o B12.",
+          task: "Confirme perguntando a hora do embarque.",
+          hint: "Great. What time does boarding start?",
+          accept: ["great what time does boarding start", "what time does boarding start", "ok what time does boarding start", "great what time is boarding", "perfect what time does boarding start"],
+          tip: "Boarding pass = cart\u00e3o de embarque. Gate = port\u00e3o. Boarding = embarque. \u201cOn time\u201d = no hor\u00e1rio."
+        },
+        {
+          tutor: "At nine thirty sharp. Have a great flight!",
+          tutor_pt: "Nove e meia em ponto. Tenha um \u00f3timo v\u00f4o!",
+          task: "Agrade\u00e7a.",
+          hint: "Thanks a lot! Have a nice day.",
+          accept: ["thanks a lot have a nice day", "thanks a lot", "thank you have a nice day", "thank you very much have a nice day", "thanks have a nice day", "thank you you too"],
+          tip: "\u201cHave a great flight\u201d \u00e9 o desejo padr\u00e3o nos aeroportos americanos. Responda sempre com um sorriso e \u201cThank you!\u201d"
+        }
+      ]
+    },
+    {
+      id: "pharmacy",
+      icon: "\ud83d\udc8a",
+      title: "Na farm\u00e1cia",
+      level: "Dia a dia",
+      desc: "Pe\u00e7a rem\u00e9dio e entenda as instru\u00e7\u00f5es",
+      steps: [
+        {
+          tutor: "Hi, welcome to the pharmacy. How can I help you?",
+          tutor_pt: "Oi, bem-vindo \u00e0 farm\u00e1cia. Como posso ajudar?",
+          task: "Diga que precisa de algo para dor de cabe\u00e7a.",
+          hint: "I need something for a headache.",
+          accept: ["i need something for a headache", "i need something for a headache please", "i need something for my headache", "i have a headache i need something", "i need something for the headache"],
+          tip: "\u201cSomething for + problema\u201d \u00e9 o jeito de pedir rem\u00e9dio: something for a cold, for a cough, for pain."
+        },
+        {
+          tutor: "Okay. Is it for you or for a child?",
+          tutor_pt: "Ok. \u00c9 para voc\u00ea ou para uma crian\u00e7a?",
+          task: "Diga que \u00e9 para voc\u00ea.",
+          hint: "It's for me.",
+          accept: ["it's for me", "for me", "it's for me thanks", "for myself", "it is for me"],
+          tip: "Eles perguntam isso por causa das doses infantis. Responda direto: \u201cIt's for me\u201d ou \u201cIt's for my son\u201d."
+        },
+        {
+          tutor: "Alright. Are you taking any other medication right now?",
+          tutor_pt: "Certo. Est\u00e1 tomando algum outro medicamento agora?",
+          task: "Diga que n\u00e3o est\u00e1 tomando nada.",
+          hint: "No, I'm not taking anything.",
+          accept: ["no i'm not taking anything", "no not taking anything", "no nothing", "no i'm not", "no i'm not taking any medication", "no i'm not taking anything right now"],
+          tip: "\u201cTaking medication\u201d = tomando rem\u00e9dio. Nos EUA nunca se diz \u201cdrinking\u201d medicine!"
+        },
+        {
+          tutor: "This one is very good. Two tablets every six hours, with food.",
+          tutor_pt: "Esse \u00e9 muito bom. Dois comprimidos a cada seis horas, com comida.",
+          task: "Confirme que entendeu e pergunte o pre\u00e7o.",
+          hint: "Got it. How much is it?",
+          accept: ["got it how much is it", "ok how much is it", "got it how much does it cost", "ok how much does it cost", "how much is it", "got it how much is it here"],
+          tip: "\u201cGot it\u201d = \u201centendi\u201d. E \u201cHow much is it?\u201d \u00e9 o \u201cquanto custa\u201d universal."
+        },
+        {
+          tutor: "That'll be eight ninety-nine. Have a nice day, and feel better!",
+          tutor_pt: "Fica oito d\u00f3lares e noventa e nove. Bom dia para voc\u00ea, e melhoras!",
+          task: "Agrade\u00e7a muito.",
+          hint: "Thank you so much!",
+          accept: ["thank you so much", "thanks so much", "thank you very much", "thanks a lot", "thank you"],
+          tip: "\u201cFeel better!\u201d = \u201cmelhoras!\u201d — o desejo carinhoso americano quando algu\u00e9m est\u00e1 doente."
+        }
+      ]
+    },
+    {
+      id: "rentcar",
+      icon: "\ud83d\ude97",
+      title: "Alugando um carro",
+      level: "Viagem",
+      desc: "Reserva, seguro e devolu\u00e7\u00e3o do carro",
+      steps: [
+        {
+          tutor: "Welcome to Speedy Rentals! Do you have a reservation?",
+          tutor_pt: "Bem-vindo \u00e0 Speedy Rentals! Voc\u00ea tem uma reserva?",
+          task: "Diga que sim, em nome de Silva.",
+          hint: "Yes, under the name Silva.",
+          accept: ["yes under the name silva", "yes under silva", "yeah under the name silva", "yes i have a reservation under silva", "yes under the name of silva", "yes it's under the name silva"],
+          tip: "\u201cUnder the name…\u201d serve para reserva de carro, hotel e restaurante. Uma \u00fanica frase para tudo!"
+        },
+        {
+          tutor: "Perfect. Do you want insurance with that?",
+          tutor_pt: "Perfeito. Quer seguro junto?",
+          task: "Aceite o seguro completo.",
+          hint: "Yes, full insurance, please.",
+          accept: ["yes full insurance please", "yes full coverage please", "yes i want full insurance", "yes full insurance", "full insurance please", "yes i'd like full insurance please"],
+          tip: "Full insurance / full coverage = cobertura total. Em d\u00favida, pergunte: \u201cWhat do you recommend?\u201d (o que voc\u00ea recomenda?)"
+        },
+        {
+          tutor: "Great. The car has a full tank, so return it full, please. Do you need GPS or a child seat?",
+          tutor_pt: "\u00d3timo. O carro est\u00e1 com o tanque cheio, ent\u00e3o devolva cheio, por favor. Precisa de GPS ou cadeirinha?",
+          task: "Recuse e diga que \u00e9 s\u00f3 isso.",
+          hint: "No, thanks. That's all.",
+          accept: ["no thanks that's all", "no thanks that's it", "no that's all thanks", "nope that's it thanks", "no thanks just that", "no thank you that's all"],
+          tip: "Full tank = tanque cheio. \u201cReturn it full\u201d = devolva cheio — pol\u00edtica padr\u00e3o das locadoras nos EUA."
+        },
+        {
+          tutor: "Alright. Here are the keys. The car is in spot number seven. Enjoy!",
+          tutor_pt: "Certo. Aqui est\u00e3o as chaves. O carro est\u00e1 na vaga n\u00famero sete. Aproveite!",
+          task: "Pergunte onde devolve o carro.",
+          hint: "Where can I return the car?",
+          accept: ["where can i return the car", "where do i return the car", "where can i drop off the car", "where do i drop it off", "where can i drop it off", "where do i return it"],
+          tip: "\u201cDrop off\u201d = devolver/deixar. Drop-off point = ponto de devolu\u00e7\u00e3o. Voc\u00ea j\u00e1 conhecia do pick up/drop off!"
+        },
+        {
+          tutor: "Just here at the office, anytime before six PM. Have fun!",
+          tutor_pt: "Aqui mesmo na loja, qualquer hor\u00e1rio antes das seis da tarde. Divirta-se!",
+          task: "Agrade\u00e7a e se despe\u00e7a.",
+          hint: "Thanks! See you soon.",
+          accept: ["thanks see you soon", "thank you see you soon", "thanks see you", "thank you have a nice day", "thanks bye", "thanks have a good one"],
+          tip: "\u201cHave a good one!\u201d = \u201ctenha um bom dia!\u201d — despedida super comum no balc\u00e3o."
+        }
+      ]
+    },
+    {
+      id: "bank",
+      icon: "\ud83c\udfe6",
+      title: "No banco",
+      level: "Dia a dia",
+      desc: "Abra conta e entenda as taxas",
+      steps: [
+        {
+          tutor: "Good morning. How may I help you today?",
+          tutor_pt: "Bom dia. Como posso ajudar hoje?",
+          task: "Diga que quer abrir uma conta corrente.",
+          hint: "I'd like to open a checking account.",
+          accept: ["i'd like to open a checking account", "i want to open a checking account", "i would like to open a checking account", "i'd like to open a bank account", "i want to open a bank account", "i'd like to open a checking account please"],
+          tip: "Checking account = conta corrente. Savings account = conta poupan\u00e7a. \u201cI'd like to…\u201d = \u201ceu gostaria de…\u201d (educado)."
+        },
+        {
+          tutor: "Sure. Do you have a social security number or an ITIN?",
+          tutor_pt: "Claro. Voc\u00ea tem um n\u00famero de seguran\u00e7a social ou um ITIN?",
+          task: "Diga que sim e entregue: \u201cHere is my SSN.\u201d",
+          hint: "Yes, here is my SSN.",
+          accept: ["yes here is my ssn", "yes here's my ssn", "yes here it is", "yes i have a ssn here it is", "yes here is my social security number", "yes here you go"],
+          tip: "SSN = social security number (o \u201cCPF\u201d americano). Sem SSN, estrangeiros usam o ITIN."
+        },
+        {
+          tutor: "Perfect. Would you like a debit card as well?",
+          tutor_pt: "Perfeito. Gostaria de um cart\u00e3o de d\u00e9bito tamb\u00e9m?",
+          task: "Aceite e pe\u00e7a com pagamento por aproxima\u00e7\u00e3o.",
+          hint: "Yes, with contactless payment, please.",
+          accept: ["yes with contactless payment please", "yes with contactless please", "yes please with contactless", "yes with contactless payment", "yes contactless please", "yes i'd like contactless please"],
+          tip: "Debit card = d\u00e9bito. Credit card = cr\u00e9dito. Contactless = por aproxima\u00e7\u00e3o (\u201ctap to pay\u201d)."
+        },
+        {
+          tutor: "No problem. Your card arrives by mail in five to seven business days.",
+          tutor_pt: "Sem problema. Seu cart\u00e3o chega pelos correios em cinco a sete dias \u00fateis.",
+          task: "Confirme e pergunte se h\u00e1 taxa mensal.",
+          hint: "By mail? Is there a monthly fee?",
+          accept: ["by mail is there a monthly fee", "ok is there a monthly fee", "by mail how much is the monthly fee", "is there a monthly fee", "okay is there a monthly fee", "got it is there a monthly fee"],
+          tip: "\u201cBy mail\u201d = pelos correios. \u201cMonthly fee\u201d = taxa mensal — pergunte SEMPRE, muitos bancos cobram!"
+        },
+        {
+          tutor: "This account has no monthly fees. Anything else I can do for you?",
+          tutor_pt: "Esta conta n\u00e3o tem taxa mensal. Mais alguma coisa em que posso ajudar?",
+          task: "Diga que \u00e9 tudo e agrade\u00e7a.",
+          hint: "No, that's everything. Thank you!",
+          accept: ["no that's everything thank you", "no that's all thank you", "no that's everything thanks", "no that's all thanks", "nope that's everything thank you", "no that's it thank you"],
+          tip: "\u201cThat's everything\u201d = \u201c\u00e9 tudo\u201d. Varia\u00e7\u00f5es: \u201cThat's all\u201d, \u201cThat's it\u201d — tr\u00eas jeitos, um significado."
+        }
+      ]
     }
   ],
 
@@ -378,6 +672,35 @@ const DATA = {
         { id: "p22", term: "look up", pt: "pesquisar, procurar (informação)", ex: "Look it up online.", ex_pt: "Pesquisa isso na internet.", note: "\u201cGoogle it\u201d é o sinônimo moderno." },
         { id: "p23", term: "point out", pt: "apontar, destacar", ex: "She pointed out a mistake.", ex_pt: "Ela apontou um erro.", note: "Chamar atenção para algo específico." },
         { id: "p24", term: "fill in / fill out", pt: "preencher (formulário)", ex: "Fill out this form, please.", ex_pt: "Preencha este formulário, por favor.", note: "Fill in e fill out: os dois servem." }
+      ]
+    },
+    {
+      id: "media",
+      icon: "\ud83c\udfac",
+      title: "Música & Filmes",
+      desc: "Expressões dos clássicos que americano fala",
+      color: "#e11d48",
+      cards: [
+        { id: "m1",  term: "let it be", pt: "deixa pra lá, deixa como está", ex: "Don't worry about it — let it be.", ex_pt: "Não se preocupe com isso — deixa pra lá.", note: "Clássico dos Beatles (1970). Ouça o refrão e perceba a calma da expressão." },
+        { id: "m2",  term: "shake it off", pt: "não ligar, deixar rolar", ex: "He was rude? Just shake it off.", ex_pt: "Ele foi grosso? Só deixa rolar.", note: "Hit da Taylor Swift (2014) sobre ignorar as críticas." },
+        { id: "m3",  term: "lose yourself", pt: "se entregar de corpo e alma", ex: "I lost myself in that series all weekend.", ex_pt: "Me entreguei de corpo e alma naquela série o fim de semana inteiro.", note: "Eminem (2002), tema do filme 8 Mile. Rápida de mais? Só a expressão importa!" },
+        { id: "m4",  term: "can't stop the feeling", pt: "não consigo segurar a empolgação", ex: "Game day! I can't stop the feeling!", ex_pt: "Dia de jogo! Não consigo segurar a empolgação!", note: "Justin Timberlake (2016). Empolgação pura." },
+        { id: "m5",  term: "take me home", pt: "me leva para casa", ex: "It's late — can you take me home?", ex_pt: "Tá tarde — você me leva pra casa?", note: "Hino \u201cTake Me Home, Country Roads\u201d (John Denver, 1971), cantado em todo bar dos EUA." },
+        { id: "m6",  term: "I will survive", pt: "vou superar", ex: "Breakups hurt, but you will survive.", ex_pt: "Términos doem, mas você vai superar.", note: "Gloria Gaynor (1978), hino disco de superação." },
+        { id: "m7",  term: "we are the champions", pt: "somos os campeões", ex: "We won the league — we are the champions!", ex_pt: "Ganhamos o campeonato — somos os campeões!", note: "Queen (1977). Toca em toda final de campeonato nos EUA." },
+        { id: "m8",  term: "don't stop believin'", pt: "não pare de acreditar", ex: "Keep studying. Don't stop believin'!", ex_pt: "Continue estudando. Não pare de acreditar!", note: "Journey (1981). A cena final de The Sopranos eternizou a música." },
+        { id: "m9",  term: "uptown / downtown", pt: "bairro nobre (norte) / centro", ex: "We're going downtown tonight.", ex_pt: "Vamos para o centro hoje à noite.", note: "\u201cUptown Funk\u201d (2014). Em NY: uptown = norte, downtown = sul/centro." },
+        { id: "m10", term: "stand by me", pt: "ficar ao meu lado, me apoiar", ex: "Will you stand by me no matter what?", ex_pt: "Você fica do meu lado em qualquer situação?", note: "Clássico do Ben E. King (1961), também filme dos anos 80." },
+        { id: "m11", term: "May the Force be with you", pt: "que a Força esteja com você (boa sorte!)", ex: "Job interview tomorrow? May the Force be with you!", ex_pt: "Entrevista amanhã? Boa sorte!", note: "Star Wars (1977). Americano de verdade diz isso para desejar sorte." },
+        { id: "m12", term: "I'll be back", pt: "eu já volto", ex: "Grabbing coffee. I'll be back in ten.", ex_pt: "Vou pegar um café. Já volto em dez minutos.", note: "Arnold Schwarzenegger em O Exterminador do Futuro (1984). A frase mais imitada de Hollywood." },
+        { id: "m13", term: "you never know", pt: "a gente nunca sabe", ex: "Buy a ticket — you never know, maybe you'll win!", ex_pt: "Compre um bilhete — nunca se sabe, talvez você ganhe!", note: "O espírito de Forrest Gump (1994): a vida é cheia de surpresas." },
+        { id: "m14", term: "You had me at hello", pt: "já me conquistou no \u201coi\u201d", ex: "She said the job has free lunch — you had me at hello!", ex_pt: "Ela disse que o trabalho tem almoço grátis — já me convenceu logo de cara!", note: "Jerry Maguire (1996), a cena romântica mais imitada dos anos 90." },
+        { id: "m15", term: "let it go", pt: "solte, deixe ir", ex: "He already apologized. Let it go.", ex_pt: "Ele já pediu desculpas. Deixa ir.", note: "O hit de Frozen (2013), cantado por toda criança americana." },
+        { id: "m16", term: "To infinity and beyond", pt: "ao infinito e além", ex: "New project launching — to infinity and beyond!", ex_pt: "Novo projeto lançando — ao infinito e além!", note: "Buzz Lightyear, Toy Story (1995). Frase de motivação cômica." },
+        { id: "m17", term: "an offer he can't refuse", pt: "uma oferta irrecusável", ex: "Free food and games? That's an offer he can't refuse.", ex_pt: "Comida e jogos de graça? Uma oferta que ele não recusa.", note: "O Poderoso Chefão (1972) — entrou de vez no inglês do dia a dia." },
+        { id: "m18", term: "keep the change", pt: "fique com o troco", ex: "Here's twenty — keep the change.", ex_pt: "Aqui está vinte — fique com o troco.", note: "Cena de Home Alone (1990). Use em táxis e lanchonetes para dar gorjeta." },
+        { id: "m19", term: "go the distance", pt: "ir até o fim, aguentar firme", ex: "Training for a marathon teaches you to go the distance.", ex_pt: "Treinar para uma maratona te ensina a ir até o fim.", note: "Tema de Rocky (1976): lutar até o último round." },
+        { id: "m20", term: "Hakuna Matata", pt: "sem problemas, relaxa", ex: "Missed the bus? Hakuna Matata, there's another one in five.", ex_pt: "Perdeu o ônibus? Relaxa, tem outro em cinco minutos.", note: "O Rei Leão (1994), do suáli. Americanos usam para dizer \u201crelaxa\u201d." }
       ]
     }
   ],

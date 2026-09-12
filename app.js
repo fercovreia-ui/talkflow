@@ -290,8 +290,7 @@ function vHome() {
         <div class="track-icon">\ud83d\udcac</div>
         <h3>Conversar</h3>
         <p class="muted small">${DATA.scenarios.length} cenários de fala real</p>
-      </div>
-      <div class="card track" data-goto="vocab">
+      </div>      <div class="card track" data-goto="vocab">
         <div class="track-icon">\ud83d\udcd8</div>
         <h3>Vocabulário</h3>
         <p class="muted small">Gírias + phrasal verbs</p>
