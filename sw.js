@@ -1,13 +1,13 @@
 /* TalkFlow — Service Worker: cache para funcionar offline
    IMPORTANTE: ao publicar conteúdo novo, suba a versão do CACHE aqui e
    o ?v= nos <script>/<link> do index.html. */
-const CACHE = "talkflow-v3";
+const CACHE = "talkflow-v4";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=7",
-  "./app.js?v=7",
-  "./data.js?v=7",
+  "./styles.css?v=8",
+  "./app.js?v=8",
+  "./data.js?v=8",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png"

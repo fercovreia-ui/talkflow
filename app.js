@@ -110,20 +110,36 @@ function micErrMsg(code) {
   if (code === "service-not-allowed") return "\ud83d\udd12 Servi\u00e7o de voz bloqueado aqui. Abra o app no Chrome ou Edge de verdade e permita o microfone.";
   if (code === "audio-capture") return "\ud83c\udf99\ufe0f Nenhum microfone encontrado. Confira em Configura\u00e7\u00f5es \u2192 Privacidade \u2192 Microfone.";
   if (code === "language-not-supported") return "\ud83c\udfa7 Reconhecimento de ingl\u00eas n\u00e3o suportado aqui. Use Chrome ou Edge.";
-  if (code === "network") return "\ud83c\udf10 O reconhecimento de fala precisa de internet.";
-  return "\ud83d\udeb7 N\u00e3o ouvi nada. Checklist: 1) Fale perto e em voz clara 2) Toque no \u2699\ufe0f e use \u201cTestar microfone\u201d 3) Se a barra n\u00e3o mexer: Configura\u00e7\u00f5es \u2192 Privacidade \u2192 Microfone \u2192 ative tudo.";
+  if (code === "network") return "\ud83c\udf10 A corre\u00e7\u00e3o de fala precisa de internet. Confira seu Wi-Fi/4G e tente de novo.";
+  if (code === "startfail") return "\ud83c\udf99\ufe0f O microfone n\u00e3o abriu \u00e0 tempo. Toque de novo e fale logo em seguida.";
+  return "\ud83d\udeb7 N\u00e3o ouvi nada. Toque no microfone e fale LOGO em seguida, bem perto do celular. Se falhar de novo, tenta mais uma vez \u2014 no celular o reconhecimento \u00e9 meio teimoso mesmo.";
 }
-function listen(onResult) {
+function listen(onResult, onRetry, attempt) {
+  attempt = attempt || 1;
   const SRc = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SRc) { onResult([], "unsupported"); return; }
   let r;
   try { r = new SRc(); } catch (e) { onResult([], "unsupported"); return; }
   r.lang = "en-US"; r.interimResults = false; r.maxAlternatives = 3;
-  let got = false;
-  r.onresult = e => { got = true; onResult(Array.from(e.results[0]).map(a => a.transcript)); };
-  r.onerror = ev => { if (!got) onResult([], ev.error); };
-  r.onend = () => { if (!got) onResult([], "empty"); };
-  try { r.start(); } catch (e) { onResult([], "startfail"); }
+  let settled = false, got = false;
+  const finish = (alts, err) => { if (settled) return; settled = true; onResult(alts, err); };
+  const retry = () => {
+    if (settled) return;
+    settled = true;
+    if (onRetry) onRetry();
+    setTimeout(() => listen(onResult, onRetry, attempt + 1), 400);
+  };
+  r.onresult = e => { got = true; finish(Array.from(e.results[0]).map(a => a.transcript)); };
+  r.onerror = ev => {
+    if (got) return;
+    if (attempt < 2 && ["no-speech", "network", "audio-capture", "aborted"].includes(ev.error)) retry();
+    else finish([], ev.error);
+  };
+  r.onend = () => { if (!got) { if (attempt < 2) retry(); else finish([], "empty"); } };
+  try { r.start(); } catch (e) {
+    if (attempt < 2) retry();
+    else finish([], "startfail");
+  }
 }
 
 /* ---------------- Autodiagnóstico do microfone ---------------- */
@@ -505,15 +521,24 @@ function openChat(sc) {
   function armMic() {
     const mic = ov.querySelector("#cMic");
     if (!mic) return;
+    let busy = false;
     mic.onclick = () => {
-      if (locked) return;
+      if (locked || busy) return;
+      busy = true;
+      // no celular, áudio tocando ao mesmo tempo impede o reconhecimento
+      if (window.speechSynthesis) speechSynthesis.cancel();
       mic.classList.add("listening");
-      feedback.innerHTML = `<div class="fb wait"><b>\ud83c\udf99\ufe0f Ouvindo… fale agora!</b></div>`;
+      feedback.innerHTML = `<div class="fb wait"><b>\ud83c\udf99\ufe0f Ouvindo… fale logo em seguida!</b></div>`;
       listen((alts, errCode) => {
+        busy = false;
         mic.classList.remove("listening");
         if (!alts.length) {
-          if (errCode === "empty" || errCode === "no-speech") runMicDiagnosis(feedback);
-          else feedback.innerHTML = `<div class="fb no"><b>${micErrMsg(errCode)}</b></div>`;
+          if ((errCode === "empty" || errCode === "no-speech" || errCode === "startfail") && !window.__micDiagDone) {
+            window.__micDiagDone = true;
+            runMicDiagnosis(feedback);
+          } else {
+            feedback.innerHTML = `<div class="fb no"><b>${micErrMsg(errCode)}</b></div>`;
+          }
           return;
         }
         const st = sc.steps[idx];
@@ -522,6 +547,9 @@ function openChat(sc) {
         userSay(best.heard || alts[0]);
         if (best.ok) okFeedback(st, tries === 0);
         else { tries++; failFeedback(best.heard || alts[0]); }
+      }, () => {
+        const w = feedback.querySelector(".fb.wait b");
+        if (w) w.textContent = "\ud83c\udf99\ufe0f Ouvindo… (2ª tentativa) fale agora!";
       });
     };
   }
@@ -772,10 +800,15 @@ function vPron() {
       res.style.display = "block";
       res.innerHTML = `<div class="fb wait"><b>\ud83c\udf99\ufe0f Ouvindo… repita: "${esc(sh.sentence)}"</b></div>`;
       speak(sh.sentence).then(() => {
+        if (window.speechSynthesis) speechSynthesis.cancel(); // libera o microfone no celular
         listen((alts, errCode) => {
           if (!alts.length) {
-            if (errCode === "empty" || errCode === "no-speech") runMicDiagnosis(res);
-            else res.innerHTML = `<div class="fb no"><b>${micErrMsg(errCode)}</b></div>`;
+            if ((errCode === "empty" || errCode === "no-speech" || errCode === "startfail") && !window.__micDiagDone) {
+              window.__micDiagDone = true;
+              runMicDiagnosis(res);
+            } else {
+              res.innerHTML = `<div class="fb no"><b>${micErrMsg(errCode)}</b></div>`;
+            }
             return;
           }
           let bestR = { score: 0, heard: "" };
@@ -793,6 +826,9 @@ function vPron() {
               <button class="btn ghost small" data-act="retry">\ud83d\udd01 De novo</button>
             </div>`;
           res.querySelector('[data-act="retry"]').onclick = () => card.querySelector('[data-act="try"]').click();
+        }, () => {
+          const w = res.querySelector(".fb.wait b");
+          if (w) w.textContent = "\ud83c\udf99\ufe0f Ouvindo… (2ª tentativa) repita agora!";
         });
       });
     };
