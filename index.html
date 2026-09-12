@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2b7de9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>TalkFlow — Inglês americano de verdade</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="logo">Talk<span>Flow</span></div>
+      <div class="chips">
+        <span class="chip-stat" id="streak">🔥 0</span>
+        <span class="chip-stat" id="xp">⚡ 0</span>
+        <button class="chip-stat gear" id="btnSettings" title="Voz do tutor">⚙️</button>
+      </div>
+    </header>
+    <main id="view"></main>
+    <nav id="tabbar">
+      <button data-view="home"><span class="t-ico">🏠</span>Início</button>
+      <button data-view="speak"><span class="t-ico">💬</span>Conversar</button>
+      <button data-view="vocab"><span class="t-ico">📚</span>Vocabulário</button>
+      <button data-view="pron"><span class="t-ico">🎤</span>Pronúncia</button>
+      <button data-view="progress"><span class="t-ico">📊</span>Progresso</button>
+    </nav>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+    }
+  </script>
+</body>
+</html>

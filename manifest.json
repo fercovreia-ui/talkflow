@@ -1,0 +1,17 @@
+{
+  "name": "TalkFlow — Inglês americano de verdade",
+  "short_name": "TalkFlow",
+  "description": "Treine a fala em inglês americano com gírias, cenários reais e correção por voz.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eef4fd",
+  "theme_color": "#2b7de9",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
